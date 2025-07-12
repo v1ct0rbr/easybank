@@ -1,5 +1,9 @@
 package com.victorqueiroga.accounts.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerDto {
 
-   private String name;
-   private String email;
-   private String mobileNumber;
+    @NotEmpty
+    @Size(min = 2, max = 50)
+    private String name;
 
-   private AccountsDto accountsDto;
+    @NotEmpty
+    @Email
+    private String email;
+
+    @Pattern(regexp = "^$|[0-9]{10}$")
+    private String mobileNumber;
+
+    private AccountsDto accountsDto;
 
 }
