@@ -15,21 +15,21 @@ import lombok.*;
 @Data
 public class CardsDto {
 
-    @NotEmpty(message = "{cards.mobileNumber.empty}")
+    @NotEmpty(message = "{cards.mobileNumber.notEmpty}")
     @Pattern(regexp="(^$|[0-9]{10})",message = "{cards.mobileNumber.pattern}")
     @Schema(
             description = "Mobile Number of Customer", example = "4354437687"
     )
     private String mobileNumber;
 
-    @NotEmpty(message = "{cards.cardNumber.empty}")
+    @NotEmpty(message = "{cards.cardNumber.notEmpty}")
     @Pattern(regexp="(^$|[0-9]{12})",message = "{cards.cardNumber.pattern}")
     @Schema(
             description = "Card Number of the customer", example = "100646930341"
     )
     private String cardNumber;
 
-    @NotEmpty(message = "{cards.cardType.empty}")
+    @NotEmpty(message = "{cards.cardType.notEmpty}")
     @Schema(
             description = "Type of the card", example = "Credit Card"
     )
