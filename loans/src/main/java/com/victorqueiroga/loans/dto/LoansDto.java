@@ -13,21 +13,21 @@ import lombok.*;
 @Data
 public class LoansDto {
 
-    @NotEmpty(message = "{loans.mobileNumber.empty}")
+    @NotEmpty(message = "{loans.mobileNumber.notEmpty}")
     @Pattern(regexp = "(^$|[0-9]{10})", message = "{loans.mobileNumber.pattern}")
     @Schema(
             description = "Mobile Number of Customer", example = "4365327698"
     )
     private String mobileNumber;
 
-    @NotEmpty(message = "{loans.loanNumber.empty}")
+    @NotEmpty(message = "{loans.loanNumber.notEmpty}")
     @Pattern(regexp = "(^$|[0-9]{12})", message = "{loans.loanNumber.pattern}")
     @Schema(
             description = "Loan Number of the customer", example = "548732457654"
     )
     private String loanNumber;
 
-    @NotEmpty(message = "{loans.loanType.empty}")
+    @NotEmpty(message = "{loans.loanType.notEmpty}")
     @Schema(
             description = "Type of the loan", example = "Home Loan"
     )

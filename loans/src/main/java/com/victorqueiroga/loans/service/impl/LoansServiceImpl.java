@@ -9,16 +9,20 @@ import com.victorqueiroga.loans.mapper.LoansMapper;
 import com.victorqueiroga.loans.repository.LoansRepository;
 import com.victorqueiroga.loans.service.ILoansService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LoansServiceImpl implements ILoansService {
 
-    private LoansRepository loansRepository;
+    private final LoansRepository loansRepository;
+    private final MessageSource messageSource;
 
     /**
      * @param mobileNumber - Mobile Number of the Customer
@@ -27,7 +31,7 @@ public class LoansServiceImpl implements ILoansService {
     public void createLoan(String mobileNumber) {
         Optional<Loans> optionalLoans= loansRepository.findByMobileNumber(mobileNumber);
         if(optionalLoans.isPresent()){
-            throw new LoanAlreadyExistsException("Loan already registered with given mobileNumber "+mobileNumber);
+            throw new LoanAlreadyExistsException(messageSource.getMessage("loan.already.exists", null, Locale.getDefault())+mobileNumber);
         }
         loansRepository.save(createNewLoan(mobileNumber));
     }
