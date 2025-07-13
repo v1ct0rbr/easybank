@@ -1,5 +1,6 @@
 package com.victorqueiroga.accounts.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -11,19 +12,30 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(
+        name = "Customer",
+        description = "Schema to hold Customer and Account details"
+)
 public class CustomerDto {
 
-    @NotEmpty
-    @Size(min = 2, max = 50)
+    @Schema(description = "Customer Name", example = "John Doe")
+    @NotEmpty(message = "{customerDto.name.notEmpty}")
+    @Size(min = 2, max = 50, message = "{customerDto.name.size}")
     private String name;
 
-    @NotEmpty
-    @Email
+    @Schema(description = "Customer Email", example = "jdoe@ex.com")
+    @NotEmpty(message = "{customerDto.email.notEmpty}")
+    @Email(message = "{customerDto.email.email}")
     private String email;
 
-    @Pattern(regexp = "^$|[0-9]{10}$")
+    @Schema(description = "Customer Mobile Number", example = "1234567890")
+    @Pattern(regexp = "^$|[0-9]{10}$", message = "{customerDto.mobileNumber.pattern}")
+    @NotEmpty(message = "{customerDto.mobileNumber.notEmpty}")
     private String mobileNumber;
 
+    @Schema(
+            name = "Accounts",
+            description = "Customer Account Details")
     private AccountsDto accountsDto;
 
 }
