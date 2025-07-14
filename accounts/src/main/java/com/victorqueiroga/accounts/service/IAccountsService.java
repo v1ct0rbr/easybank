@@ -1,6 +1,10 @@
 package com.victorqueiroga.accounts.service;
 
+import com.victorqueiroga.accounts.dto.AccountsDto;
 import com.victorqueiroga.accounts.dto.CustomerDto;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface IAccountsService {
@@ -8,14 +12,14 @@ public interface IAccountsService {
     /**
      * Create account
      *
-     * @param customerDto - customer details
+     * @param customerDto the customer details
      */
     void createAccount(CustomerDto customerDto);
 
     /**
      * Fetch account details
      *
-     * @param mobileNumber - mobile number
+     * @param mobileNumber the mobile number
      * @return Accounts Details based on mobile number
      */
     CustomerDto fetchAccount(@RequestParam String mobileNumber);
@@ -23,17 +27,16 @@ public interface IAccountsService {
     /**
      * Update account details
      *
-     * @param customerDto - customer details
-     * @return true if account details are updated
+     * @param costumerDto the customer details
+     * @return boolean indicating if the account details are updated
      */
-    boolean updateAccount(CustomerDto customerDto);
+
+    boolean updateAccount(CustomerDto costumerDto);
 
     /**
-     * Delete account details
+     * Delete account
      *
-     * @param mobileNumber - mobile number
-     * @return true if account details are deleted
+     * @param mobileNumber the mobile number
      */
     boolean deleteAccount(@RequestParam String mobileNumber);
-
 }
