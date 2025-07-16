@@ -11,10 +11,10 @@ services:
     networks:
       - easybank
   loans:
-    image: victorqueirogabr/loans:s4
+    image: victorqueirogabr/loans:s6
     container_name: loans-ms
     ports:
-      - "8090:8080"
+      - "8089:8089"
     deploy:
       resources:
         limits:
@@ -25,7 +25,7 @@ services:
     image: victorqueirogabr/cards:s4
     container_name: cards-ms
     ports:
-      - "8089:9000"
+      - "9000:9000"
     deploy:
       resources:
         limits:

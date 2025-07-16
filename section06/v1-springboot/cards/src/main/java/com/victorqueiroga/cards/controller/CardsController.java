@@ -2,6 +2,7 @@ package com.victorqueiroga.cards.controller;
 
 
 import com.victorqueiroga.cards.constants.CardsConstants;
+import com.victorqueiroga.cards.dto.CardsContactInfoDto;
 import com.victorqueiroga.cards.dto.CardsDto;
 import com.victorqueiroga.cards.dto.ErrorResponseDto;
 import com.victorqueiroga.cards.dto.ResponseDto;
@@ -16,6 +17,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +41,15 @@ import org.springframework.web.bind.annotation.*;
 public class CardsController {
 
     private final ICardsService iCardsService;
+    
+    @Autowired
+    private Environment environment;
+    
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Autowired
+    private CardsContactInfoDto cardsContactInfoDto;
 
     @Operation(
             summary = "Create Card REST API",
@@ -161,6 +174,107 @@ public class CardsController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_DELETE));
         }
+    }
+
+    @Operation(
+            summary = "Get build version",
+            description = "Get build version in EasyBank"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Success",
+                            content = {
+                                    @Content(
+                                            schema = @Schema(
+                                                    implementation = String.class,
+                                                    example = "1.0.0"
+
+                                            )
+                                    )
+                            }
+
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal Server Error",
+                            content = {
+                                    @Content(
+                                            schema = @Schema(
+                                                    implementation = ErrorResponseDto.class
+                                            )
+                                    )
+                            }
+                    )
+            }
+    )
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        String javaVersion = environment.getProperty("JAVA_HOME");
+        return ResponseEntity.status(HttpStatus.OK).body(javaVersion); } // <1>
+
+    @Operation(
+            summary = "Get build version",
+            description = "Get build version in EasyBank"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Success",
+                            content = {
+                                    @Content(
+                                            schema = @Schema(
+                                                    implementation = String.class,
+                                                    example = "1.0.0"
+
+                                            )
+                                    )
+                            }
+
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal Server Error",
+                            content = {
+                                    @Content(
+                                            schema = @Schema(
+                                                    implementation = ErrorResponseDto.class
+                                            )
+                                    )
+                            }
+                    )
+            }
+    )
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildVersion() {
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion); // <2>
+    }
+
+    @Operation(
+            summary = "Get contact info",
+            description = "Get contact info that can be reached out in case of any issues"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Success",
+                            content = {
+                                    @Content(
+                                            schema = @Schema(
+                                                    implementation = CardsContactInfoDto.class
+
+                                            )
+                                    )
+                            }
+                    )
+            }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<CardsContactInfoDto> getAccountsContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(cardsContactInfoDto);
     }
 
 }
