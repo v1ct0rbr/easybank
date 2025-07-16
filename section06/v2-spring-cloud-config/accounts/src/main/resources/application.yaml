@@ -3,7 +3,7 @@ server:
   port: 8080
 spring:
   application:
-    name: accounts
+    name: "accounts"
   datasource:
     url: jdbc:h2:mem:accountsdb
     username: "sa"
@@ -22,25 +22,12 @@ spring:
     restart:
       enabled: true
   profiles:
-    active:
-      - "qa"
+    active: "qa"
   config:
-    import:
-      - "application_prod.yaml"
-      - "application_qa.yaml"
+    import: "optional:configserver:http://localhost:8071/"
+
 
 logging:
   level:
     org.springframework.web: error
 
-build:
-  version: "3.0"
-
-accounts:
-  message: "Welcome to Accounts service"
-  contactDetails:
-    name: "Victor Queiroga"
-    email: "contato@victorqueiroga.com"
-  onCallSupport:
-    -(555) 555-5555,
-    -(555) 555-5556

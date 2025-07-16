@@ -1,13 +1,8 @@
-spring:
-  config:
-    activate:
-      on-profile: "qa"
-
 build:
   version: "2.0"
 
-accounts:
-  message: "Welcome to Accounts service"
+loans:
+  message: "Welcome to Loans service qa APIs"
   contactDetails:
     name: "Victor Henrique"
     email: "victorqueiroga@victorqueiroga.com"

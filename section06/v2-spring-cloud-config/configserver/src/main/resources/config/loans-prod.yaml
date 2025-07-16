@@ -1,13 +1,8 @@
-spring:
-  config:
-    activate:
-      on-profile: "prod"
-
 build:
   version: "1.0"
 
-accounts:
-  message: "Welcome to Accounts service"
+loans:
+  message: "Welcome to Loans service prod APIs"
   contactDetails:
     name: "Queiroga victor"
     email: "contato2@victorqueiroga.com"
