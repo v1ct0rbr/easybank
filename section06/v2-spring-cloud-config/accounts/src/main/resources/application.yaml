@@ -22,7 +22,7 @@ spring:
     restart:
       enabled: true
   profiles:
-    active: "qa"
+    active: "prod"
   config:
     import: "optional:configserver:http://localhost:8071/"
 
