@@ -1,0 +1,13 @@
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to Loans service local APIs"
+  contactDetails:
+    name: "Victor Queiroga"
+    email: "contato@victorqueiroga.com"
+  onCallSupport:
+    -(555) 555-5555,
+    -(555) 555-5556
+
+

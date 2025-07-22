@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to Accounts service"
+  contactDetails:
+    name: "Victor Henrique"
+    email: "victorqueiroga@victorqueiroga.com"
+  onCallSupport:
+    -(555) 555-5555,
+    -(555) 555-5556

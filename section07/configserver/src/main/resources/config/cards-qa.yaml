@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.0"
+
+cards:
+  message: "Welcome to Cards service QA APIs"
+  contactDetails:
+    name: "Victor Henrique"
+    email: "victorqueiroga@victorqueiroga.com"
+  onCallSupport:
+    -(555) 555-5555,
+    -(555) 555-5556
